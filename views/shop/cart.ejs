@@ -1,0 +1,36 @@
+<%- include("../includes/head.ejs") %>
+    <%- include("../includes/navigation.ejs") %>
+    
+    <main>
+        <ul class="cart">
+            <% if (cartItems.length === 0) { %>
+                <h2 class="centered">Cart is empty</h2>
+            <% } else { %>
+            <% cartItems.forEach(item => { %>
+                <li class="cart-item">
+                    <h1><%= item.productId.title %></h1>
+                    <h2>Quantity: <%= item.quantity %></h2>
+                    <div class="cart-actions">
+                        <form action="/cart?decrease=true" method="POST">
+                            <input type="hidden" name="bookId" value="<%= item.productId._id %>">
+                            <button type="submit" class="btn btn-decrease">-</button>
+                        </form>
+                        <form action="/cart" method="POST">
+                            <input type="hidden" name="bookId" value="<%= item.productId._id %>">
+                            <button type="submit" class="btn btn-increase">+</button>
+                        </form>
+                        <form action="/delete-cart-item" method="POST">
+                            <input type="hidden" name="bookId" value="<%= item.productId._id %>">
+                            <button type="submit" class="btn btn-delete">Delete</button>
+                        </form>
+                    </div>
+                </li>
+            <% }) %>
+            <form class="cart-form" action="/order" method="POST">
+                <input type="hidden" name="userId" value="<%= userId %>">
+                <button class="btn btn-order">Order Books</button>
+            </form>
+            <% } %>
+        </ul>
+    </main>
+<%- include("../includes/end.ejs") %> 

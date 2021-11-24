@@ -1,0 +1,17 @@
+<%- include("../includes/head.ejs") %> 
+    <%- include("../includes/navigation.ejs") %>
+    <main>
+            <form action="/login" method="POST" class="add-book">
+        
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" >
+
+            <label for="password">Password</label>
+            <input type="text" id="password" name="password" >
+
+            <button type="submit" class="btn btn-add">Sign In</button>
+        </form>
+    </main>
+    
+    
+<%- include("../includes/end.ejs") %> 

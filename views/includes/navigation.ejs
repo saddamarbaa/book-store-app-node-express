@@ -1,0 +1,29 @@
+<header class="header">
+    <nav class="main-navigation">
+        <ul class="shop-navigation">
+            <li><a href="/" class="<%= path === "/" ? "active" : "" %>">Store</a></li>
+            <% if (isAuthenticated) { %> 
+                <li><a href="/cart" class="<%= path === "/cart" ? "active" : "" %>">Cart</a></li>
+                <li><a href="/order" class="<%= path === "/order" ? "active" : "" %>">Orders</a></li>
+                <% if (isAdmin) { %> 
+                    <li><a href="/admin/books" class="<%= path === "/admin/books" ? "active" : "" %>">Admin Books</a></li>
+                    <li><a href="/admin/add-book" class="<%= path === "/admin/add-book" ? "active" : "" %>">Add Book</a></li>
+                    <li><a href="/admin/users" class="<%= path === "/admin/users" ? "active" : "" %>">Admin Users</a></li>
+                    <li><a href="/admin/add-user" class="<%= path === "/admin/add-user" ? "active" : "" %>">Add User</a></li>
+                <% } %>
+            <% } %> 
+        </ul>
+
+        <ul class="auth-navigation">
+
+            <% if(!isAuthenticated) {  %> 
+                <li><a href="/login" class="<%= path === "/login" ? "active" : "" %>">Login</a></li>
+                <li><a href="/signup" class="<%= path === "/signup" ? "active" : "" %>">Register</a></li>
+            <% } else { %>
+                <li><a href="/logout">Logout</a></li>
+            <% } %> 
+         
+
+        </ul>
+    </nav>
+</header>

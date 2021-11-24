@@ -1,0 +1,21 @@
+<%- include("../includes/head.ejs") %>
+    <%- include("../includes/navigation.ejs") %>
+    
+    <main>
+        <h1 class="admin-user-title"><%= username %>'s Orders</h1>
+        <ul class="user-list">
+           <% orders.forEach((order) => { %>
+                <li class="user">
+                    <p class="user-username"><%= order._id %></p>
+                    <div class="user-list__actions">
+                        <form action="/admin/delete-order" method="POST">
+                            <input type="hidden" name="orderId" value="<%= order._id %>">
+                            <input type="hidden" name="userId" value="<%= userId %>">
+                            <button type="submit" class="btn btn-delete">Delete</button>
+                        </form>
+                    </div>
+                </li>  
+            <%})%> 
+        </ul>
+    </main>
+<%- include("../includes/end.ejs") %>

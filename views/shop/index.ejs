@@ -1,0 +1,26 @@
+<%- include("../includes/head.ejs") %> 
+    <%- include("../includes/navigation.ejs") %>
+
+    <main>
+        <ul class="product-list">
+            <% books.forEach(book => { %>
+                <li class="product">
+                    <header class="product__header">
+                        <h1 class="product__title"><%= book.title %></h1>
+                    </header>
+                    <div class="product-image__container">
+                        <img src="<%= book.image %>" alt="">
+                    </div>
+                    <div class="product__content">
+                        <p class="product__description"><%= book.description %></p>
+                    </div>
+                    <form  action="/cart" method="POST">
+                        <input type="hidden" name="bookId" value="<%= book._id %>">
+                        <button type="submit" class="btn btn-add-cart">Add to Cart</button>
+                    </form>
+                </li>
+            <% }) %>
+            
+        </ul>
+    </main>
+<%- include("../includes/end.ejs") %> 

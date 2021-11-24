@@ -1,0 +1,28 @@
+<%- include("../includes/head") %> 
+    <%- include("../includes/navigation") %> 
+
+    <main>
+        <ul class="product-list">
+            <% books.forEach(book => { %>
+                <li class="product">
+                    <header class="product__header">
+                        <h1 class="product__title"><%= book.title %></h1>
+                    </header>
+                    <div class="product-image__container">
+                        <img src="<%= book.image %>" alt="">
+                    </div>
+                    <div class="product__content">
+                        <p class="product__description"><%= book.description %></p>
+                    </div>
+                    <div class="actions">
+                        <a href="/admin/edit-book/<%= book._id %>" class="btn btn-edit">Edit</a>
+                        <form  action="/admin/delete-book" method="POST">
+                            <input type="hidden" name="bookId" value="<%= book._id %>">
+                            <button class="btn btn-delete">Delete</button>
+                        </form>
+                    </div>
+                </li>
+            <% }) %>
+        </ul>
+    </main>
+<%- include("../includes/end") %>

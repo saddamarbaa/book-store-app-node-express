@@ -1,0 +1,23 @@
+<%- include("../includes/head.ejs") %> 
+    <%- include("../includes/navigation.ejs") %>
+    <main>
+        <% if (editMode) { %>
+            <form action="/admin/edit-user" method="POST" class="add-book">
+        <% } else { %>
+            <form action="/admin/add-user" method="POST" class="add-book">
+        <% } %>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" value="<%= editMode ? user.username : ""%>">
+
+            <label for="password">Password</label>
+            <input type="text" id="password" name="password" value="<%= editMode ? user.password : ""%>">
+
+            <% if (editMode) { %>
+                <input type="hidden" name="userId" value="<%= user._id %>">
+            <% } %>
+
+            <button type="submit" class="btn btn-add"><%= editMode ? "Update User" : "Add User" %></button>
+        </form>
+    </main>
+    
+<%- include("../includes/end.ejs") %> 
