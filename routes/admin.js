@@ -1,4 +1,5 @@
 const express = require("express");
+const multer = require("multer");
 
 const adminControllers = require("../controllers/admin");
 const isAdmin = require("../middleware/isAdmin");
@@ -12,7 +13,12 @@ router.get("/books", isAdmin, adminControllers.getBooks);
 router.get("/add-book", isAdmin, adminControllers.getAddBook);
 
 // POST => /admin/add-book
-router.post("/add-book", isAdmin, adminControllers.postAddBook);
+router.post(
+  "/add-book",
+  isAdmin,
+
+  adminControllers.postAddBook
+);
 
 // GET => /admin/edit-book/:bookId
 router.get("/edit-book/:bookId", isAdmin, adminControllers.getEditBook);

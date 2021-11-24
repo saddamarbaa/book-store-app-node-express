@@ -1,9 +1,10 @@
 const Book = require("../models/book");
 const User = require("../models/user");
 const Order = require("../models/order");
+const book = require("../models/book");
 
 exports.getIndex = (req, res, next) => {
-  Book.find({})
+  Book.find({ quantity: { $gt: 0 } })
     .then((books) => {
       res.render("shop/index", {
         pageTitle: "Book Store",
@@ -53,19 +54,22 @@ exports.postDeleteCartItem = (req, res, next) => {
 };
 
 exports.getOrder = (req, res, next) => {
+  const message = req.query.message;
   Order.find({ userId: req.user._id })
     .then((orders) => {
       res.render("shop/order", {
         pageTitle: "Orders",
         path: "/order",
         orders: orders,
+        message: message ? message : "",
       });
     })
     .catch((err) => console.log(err));
 };
 
 exports.postOrder = (req, res, next) => {
-  // https://stackoverflow.com/questions/32546909/how-to-prevent-double-submitting-forms-in-expressjs
+  const userMessage =
+    "Thank you, your books will be shipped in 2-3 business days";
   req.user.haveOrderRight((orderRight) => {
     if (!orderRight) {
       return res.redirect("/cart");
@@ -82,6 +86,10 @@ exports.postOrder = (req, res, next) => {
         });
         const order = {
           items: orderItems,
+          name: req.body.name,
+          email: req.body.email,
+          phone: req.body.phone,
+          address: req.body.address,
           userId: userCart._id,
         };
 
@@ -89,14 +97,46 @@ exports.postOrder = (req, res, next) => {
           return res.redirect("/cart");
         }
 
+        if (req.user.cart.items.length <= 0) {
+          return res.redirect("/");
+        }
+
         const newOrder = new Order(order);
-        newOrder
-          .save()
-          .then((result) => {
-            return req.user.clearCart();
-          })
-          .then((result) => {
-            res.redirect("/order");
+
+        const bookIds = newOrder.items.map((item) => {
+          return item.product._id;
+        });
+
+        Book.find({ _id: { $in: bookIds } })
+          .then((books) => {
+            for (const book of books) {
+              for (const item of newOrder.items) {
+                if (item.product._id.toString() === book._id.toString()) {
+                  if (book.quantity < item.quantity) {
+                    return res.redirect("/");
+                  }
+                }
+              }
+            }
+
+            for (const item of newOrder.items) {
+              Book.findById(item.product._id)
+                .then((book) => {
+                  book.quantity -= item.quantity;
+                  book.save();
+                })
+                .catch((err) => console.log(err));
+            }
+
+            newOrder
+              .save()
+              .then((result) => {
+                return req.user.clearCart();
+              })
+              .then((result) => {
+                res.redirect(`/order?message=${userMessage}`);
+              })
+              .catch();
           })
           .catch((err) => console.log(err));
       });

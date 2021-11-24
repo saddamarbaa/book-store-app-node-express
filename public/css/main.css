@@ -19,10 +19,21 @@ body {
   margin: 0;
   font-size: 1.5rem;
   font-family: sans-serif;
+  overflow-x: hidden;
 }
 
 .centered {
   text-align: center;
+}
+
+.flash-message {
+  font-size: 1.125rem;
+  margin-top: 1rem;
+  background: lightgreen;
+  color: green;
+  text-align: center;
+  padding: 0.5em;
+  display: inline-block;
 }
 
 .header {
@@ -92,6 +103,10 @@ body {
 }
 
 .product__header {
+  text-align: center;
+}
+
+.product__quantity {
   text-align: center;
 }
 
@@ -206,6 +221,86 @@ body {
 .btn.btn-delete:hover {
   background: #fff;
   color: #ff0000;
+}
+
+#backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.815);
+  display: none;
+}
+
+.order-information {
+  position: absolute;
+  background-color: #fefefe;
+  padding: 2em;
+  width: 80%;
+  max-width: 600px;
+  top: 50%;
+  left: 50%;
+  border-radius: 20px;
+  margin: 30px auto;
+  transform: translate(-50%, -50%);
+
+  display: none;
+  z-index: 500;
+}
+
+.order-information form {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-information form label {
+  margin-top: 1em;
+}
+
+.order-information form label:first-child {
+  margin-top: 0;
+}
+
+.order-information form input {
+  padding: 0.5em 1em;
+  margin-top: 0.7em;
+  box-shadow: 0 1px 0 rgb(255 255 255 / 50%), 0 1px 0 rgb(0 0 0 / 7%) inset;
+  border: 1px solid #a6a6a6;
+  border-top-color: #949494;
+  transition: 0.4s;
+  min-height: 1.7rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  outline: 0;
+}
+
+.order-information form input:focus,
+.order-information form input :active {
+  outline: 0 !important;
+  outline: 0 !important;
+  border-color: #0a66c2;
+  box-shadow: 0 0 3px 2px rgb(14 118 168/ 50%);
+}
+
+.btn-order-now {
+  align-self: center;
+  margin-top: 2em;
+}
+
+.close-modal {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2.5rem;
+  font-weight: 900;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.close-modal:hover {
+  color: red;
 }
 
 /* Admin Books */

@@ -26,11 +26,31 @@
                     </div>
                 </li>
             <% }) %>
-            <form class="cart-form" action="/order" method="POST">
-                <input type="hidden" name="userId" value="<%= userId %>">
-                <button class="btn btn-order">Order Books</button>
+            <form class="cart-form">
+                <button id="pre-order-btn" class="btn btn-order">Order Books</button>
             </form>
             <% } %>
         </ul>
+        <div id="backdrop"></div>
+        <div class="order-information">
+            <form class="cart-form" action="/order" method="POST">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name">
+
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email">
+
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone">
+
+                <label for="address">Address</label>
+                <input type="text" id="address" name="address">
+
+                <input type="hidden" name="userId" value="<%= userId %>">
+
+                <button type="submit" class="btn btn-order btn-order-now">Order Now</button>
+            </form>
+            <button class="close-modal">X</button>
+        </div>
     </main>
 <%- include("../includes/end.ejs") %> 

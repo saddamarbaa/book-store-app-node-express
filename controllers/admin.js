@@ -24,10 +24,17 @@ exports.getAddBook = (req, res, next) => {
 };
 
 exports.postAddBook = (req, res, next) => {
+  const image = req.file;
+
+  if (!image) {
+    return res.redirect("/admin/books");
+  }
+
   const book = {
     title: req.body.title,
-    image: req.body.image,
+    image: req.file.path,
     description: req.body.description,
+    quantity: req.body.quantity,
   };
 
   const newBook = new Book(book);
@@ -60,12 +67,14 @@ exports.postEditBook = (req, res, next) => {
   updatedTitle = req.body.title;
   updatedImage = req.body.image;
   updatedDescription = req.body.description;
+  updatedQuantity = req.body.quantity;
 
   Book.findById(bookId)
     .then((book) => {
       book.title = updatedTitle;
       book.image = updatedImage;
       book.description = updatedDescription;
+      book.quantity = updatedQuantity;
       return book.save();
     })
     .then((result) => {

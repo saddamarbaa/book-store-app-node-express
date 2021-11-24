@@ -2,18 +2,21 @@
     <%- include("../includes/navigation.ejs") %>
     <main>
         <% if (editMode) { %>
-            <form action="/admin/edit-book" method="POST" class="add-book">
+            <form action="/admin/edit-book" method="POST" class="add-book" enctype="multipart/form-data">
         <% } else { %>
-            <form action="/admin/add-book" method="POST" class="add-book">
+            <form action="/admin/add-book" method="POST" class="add-book" enctype="multipart/form-data">
         <% } %>
             <label for="title">Title</label>
-            <input type="text" id="title" name="title" value="<%= editMode ? book.title : "" %>">
+            <input type="text" id="title" name="title" required value="<%= editMode ? book.title : "" %>">
     
             <label for="image">Image</label>
-            <input type="text" id="image" name="image" value="<%= editMode ? book.image : "" %>">
+            <input type="file" id="image" name="image" required value="<%= editMode ? book.image : "" %>">
+            
+            <label for="quantity">Quantity</label>
+            <input type="number" min="0" id="quantity" required name="quantity" value="<%= editMode ? book.quantity : "" %>">
     
             <label for="description">Description</label>
-            <textarea name="description" id="description" cols="30" rows="10"><%= editMode ? book.description : "" %></textarea>
+            <textarea name="description" id="description" required cols="30" rows="10"><%= editMode ? book.description : "" %></textarea>
             
             <% if (editMode) { %>
                 <input type="hidden" name="bookId" value="<%= book._id %>">

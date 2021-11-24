@@ -8,6 +8,22 @@ const order = new Schema({
       quantity: { type: Number, required: true },
     },
   ],
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  phone: {
+    type: String,
+    required: true,
+  },
+  address: {
+    type: String,
+    required: true,
+  },
   userId: {
     type: Schema.Types.ObjectId,
     required: true,

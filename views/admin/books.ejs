@@ -9,7 +9,10 @@
                         <h1 class="product__title"><%= book.title %></h1>
                     </header>
                     <div class="product-image__container">
-                        <img src="<%= book.image %>" alt="">
+                        <img src="http://localhost:3000/<%= book.image %>" alt="">
+                    </div>
+                    <div class="product__content">
+                        <p class="product__quantity">Quantity: <span style="color: green;font-weight: 900;"><%= book.quantity %></span></p>
                     </div>
                     <div class="product__content">
                         <p class="product__description"><%= book.description %></p>
