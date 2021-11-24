@@ -1,25 +1,25 @@
 {
-  "name": "book_store",
-  "version": "1.0.0",
-  "description": "An online Book Store",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
-  },
-  "author": "Dimitris Karakaxas",
-  "license": "ISC",
-  "dependencies": {
-    "bcrypt": "^5.0.1",
-    "connect-mongodb-session": "^3.1.1",
-    "ejs": "^3.1.6",
-    "express": "^4.17.1",
-    "express-session": "^1.17.2",
-    "mongoose": "^6.0.13",
-    "multer": "^1.4.3"
-  },
-  "devDependencies": {
-    "dotenv": "^10.0.0",
-    "nodemon": "^2.0.15"
-  }
+	"name": "book_store",
+	"version": "1.0.0",
+	"description": "An online Book Store",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "nodemon app.js"
+	},
+	"author": "Saddm Arbaa",
+	"license": "ISC",
+	"dependencies": {
+		"bcrypt": "^5.0.1",
+		"connect-mongodb-session": "^3.1.1",
+		"ejs": "^3.1.6",
+		"express": "^4.17.1",
+		"express-session": "^1.17.2",
+		"mongoose": "^6.0.13",
+		"multer": "^1.4.3"
+	},
+	"devDependencies": {
+		"dotenv": "^10.0.0",
+		"nodemon": "^2.0.15"
+	}
 }
