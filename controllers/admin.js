@@ -1,3 +1,5 @@
+const fileHelper = require("../util/file");
+
 const User = require("../models/user");
 const Book = require("../models/book");
 const Order = require("../models/order");
@@ -30,9 +32,11 @@ exports.postAddBook = (req, res, next) => {
     return res.redirect("/admin/books");
   }
 
+  const imageUrl = `/${image.path}`;
+
   const book = {
     title: req.body.title,
-    image: req.file.path,
+    image: imageUrl,
     description: req.body.description,
     quantity: req.body.quantity,
   };
@@ -64,14 +68,22 @@ exports.getEditBook = (req, res, next) => {
 exports.postEditBook = (req, res, next) => {
   const bookId = req.body.bookId;
 
-  updatedTitle = req.body.title;
-  updatedImage = req.body.image;
-  updatedDescription = req.body.description;
-  updatedQuantity = req.body.quantity;
+  const image = req.file;
+  if (!image) {
+    return res.redirect("/admin/books");
+  }
+
+  const updatedTitle = req.body.title;
+  const updatedImage = image.path;
+  const updatedDescription = req.body.description;
+  const updatedQuantity = req.body.quantity;
 
   Book.findById(bookId)
     .then((book) => {
       book.title = updatedTitle;
+      if (image) {
+        book.image = `/${image.path}`;
+      }
       book.image = updatedImage;
       book.description = updatedDescription;
       book.quantity = updatedQuantity;

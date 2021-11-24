@@ -29,11 +29,16 @@ body {
 .flash-message {
   font-size: 1.125rem;
   margin-top: 1rem;
+  padding: 0.3em;
   background: lightgreen;
   color: green;
   text-align: center;
-  padding: 0.5em;
-  display: inline-block;
+  transition: 0.4s 2s;
+}
+
+.flash-message-out {
+  color: transparent;
+  background: transparent;
 }
 
 .header {

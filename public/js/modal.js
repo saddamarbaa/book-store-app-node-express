@@ -6,18 +6,21 @@ const backdrop = document.getElementById("backdrop");
 const btn = document.getElementById("pre-order-btn");
 
 const closeModalBtn = document.querySelector(".close-modal");
-console.log(closeModalBtn);
 
-btn.onclick = (event) => {
-  event.preventDefault();
-  backdrop.style.display = "block";
-  modal.style.display = "block";
-};
+if (btn) {
+  btn.onclick = (event) => {
+    event.preventDefault();
+    backdrop.style.display = "block";
+    modal.style.display = "block";
+  };
+}
 
-closeModalBtn.onclick = () => {
-  modal.style.display = "none";
-  backdrop.style.display = "none";
-};
+if (closeModalBtn) {
+  closeModalBtn.onclick = () => {
+    modal.style.display = "none";
+    backdrop.style.display = "none";
+  };
+}
 
 window.addEventListener("click", (event) => {
   if (event.target == backdrop) {
@@ -25,3 +28,12 @@ window.addEventListener("click", (event) => {
     backdrop.style.display = "none";
   }
 });
+
+window.onload = () => {
+  const flashMessage = document.querySelector(".flash-message");
+
+  if (flashMessage) {
+    console.log(flashMessage);
+    flashMessage.classList.add("flash-message-out");
+  }
+};
